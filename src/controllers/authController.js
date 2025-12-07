@@ -68,7 +68,8 @@ exports.register = async (req, res, next) => {
 // @access  Public
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const email = (req.body.email || '').trim().toLowerCase();
+    const password = req.body.password;
 
     // Validate input
     if (!email || !password) {
@@ -76,7 +77,7 @@ exports.login = async (req, res, next) => {
     }
 
     // Find user
-    const user = await User.findOne({
+    const user = await User.scope('withPassword').findOne({
       where: { email },
       include: [
         {

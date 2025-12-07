@@ -25,20 +25,8 @@ module.exports = async () => {
       return;
     }
 
-    let bcryptLib;
-    try { bcryptLib = require('bcrypt'); } catch (e) {
-      try { bcryptLib = require('bcryptjs'); } catch (e2) { bcryptLib = null; }
-    }
-
-    let hashedPassword = password;
-    if (bcryptLib) {
-      const saltRounds = 10;
-      hashedPassword = await bcryptLib.hash(password, saltRounds);
-    } else {
-      console.warn('bcrypt/bcryptjs tidak tersedia; password tidak di-hash. Login mungkin gagal.');
-    }
-
-    const defaults = { name, email, password: hashedPassword };
+    const normalizedEmail = (email || '').trim().toLowerCase();
+    const defaults = { name, email: normalizedEmail, password };
     const hasPosition = User.rawAttributes && User.rawAttributes.position;
     if (hasPosition) defaults.position = 'P';
 
@@ -48,7 +36,7 @@ module.exports = async () => {
     if (divisionFk) defaults[divisionFk] = division.id;
 
     const [user] = await User.findOrCreate({
-      where: { email },
+      where: { email: normalizedEmail },
       defaults
     });
 
