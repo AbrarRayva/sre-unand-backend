@@ -29,7 +29,7 @@ Buat file `.env` di root folder:
 
 ```env
 NODE_ENV=development
-PORT=3000
+PORT=5000
 
 # Database
 DB_HOST=localhost
@@ -46,7 +46,7 @@ JWT_EXPIRE=7d
 MAX_FILE_SIZE=5242880
 
 # Base URL
-BASE_URL=http://localhost:3000
+BASE_URL=http://localhost:5000
 ```
 
 ### 4. Run Seeders
@@ -71,11 +71,11 @@ npm run dev
 npm start
 ```
 
-Server akan berjalan di `http://localhost:3000`
+Server akan berjalan di `http://localhost:5000`
 
 ### 6. Akses API Documentation
 
-Buka browser dan akses: `http://localhost:3000/api-docs`
+Buka browser dan akses: `http://localhost:5000/api-docs`
 
 ---
 
@@ -583,7 +583,7 @@ Response: {
 
 ### Base URL
 ```javascript
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 ```
 
 ### Authentication Header
