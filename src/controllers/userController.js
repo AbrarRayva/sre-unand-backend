@@ -327,3 +327,17 @@ exports.downloadCSVTemplate = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Get all available roles
+// @route   GET /api/admin/users/roles
+// @access  Private (HR role)
+exports.getRoles = async (req, res, next) => {
+  try {
+    const roles = await Role.findAll({
+      order: [['id', 'ASC']]
+    });
+    successResponse(res, roles);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -10,15 +10,22 @@ const {
   updateUser,
   deleteUser,
   bulkUploadUsers,
-  downloadCSVTemplate
+  downloadCSVTemplate,
+  getRoles // Memastikan fungsi ini diimport
 } = require('../controllers/userController');
 
 router.use(authenticate);
-router.use(checkPermission('users.manage')); // Only HR can access
+router.use(checkPermission('users.manage')); // Proteksi akses HR/Admin
 
+// Rute Statis (Harus di atas rute dinamis /:id)
 router.get('/', getAllUsers);
+router.get('/roles', getRoles); // Endpoint untuk UserService.getRoles
 router.get('/csv-template', downloadCSVTemplate);
+
+// Rute dengan Middleware File Upload
 router.post('/bulk-upload', uploadCSV, bulkUploadUsers);
+
+// Rute Dinamis dan CRUD
 router.get('/:id', getUser);
 router.post('/', createUser);
 router.put('/:id', updateUser);

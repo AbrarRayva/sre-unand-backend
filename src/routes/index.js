@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+// Import all routes
 const authRoutes = require('./authRoutes');
 const userRoutes = require('./userRoutes');
 const divisionRoutes = require('./divisionRoutes');
@@ -10,8 +11,10 @@ const articleRoutes = require('./articleRoutes');
 const cashRoutes = require('./cashRoutes');
 
 // Mount routes
+// Perhatikan: Frontend memanggil /api/admin/users/roles
+// Prefix '/admin/users' di sini akan diteruskan ke userRoutes.js
 router.use('/auth', authRoutes);
-router.use('/admin/users', userRoutes);
+router.use('/admin/users', userRoutes); 
 router.use('/divisions', divisionRoutes);
 router.use('/work-programs', workProgramRoutes);
 router.use('/documents', documentRoutes);

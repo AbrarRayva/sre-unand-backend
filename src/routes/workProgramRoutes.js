@@ -17,8 +17,8 @@ router.get('/:id', authenticate, getWorkProgram);
 router.get('/division/:divisionId', authenticate, getWorkProgramsByDivision);
 
 // Protected routes (Directors and Admin)
-router.post('/', authenticate, checkPermission('workprograms.manage'), createWorkProgram);
-router.put('/:id', authenticate, checkPermission('workprograms.manage'), updateWorkProgram);
-router.delete('/:id', authenticate, checkPermission('workprograms.manage'), deleteWorkProgram);
+router.post('/', authenticate, checkPermission('work_programs.manage'), createWorkProgram);
+router.put('/:id', authenticate, checkPermission('work_programs.manage'), updateWorkProgram);
+router.delete('/:id', authenticate, checkPermission('work_programs.manage'), deleteWorkProgram);
 
 module.exports = router;
